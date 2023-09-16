@@ -1,0 +1,25 @@
+{
+  "name": "webfocus",
+  "displayName": "WebFOCUS",
+  "description": "WebFOCUS Language Support",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "webfocus",
+      "aliases": ["WebFOCUS", "webfocus"],
+      "extensions": [".fex"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "webfocus",
+      "scopeName": "source.webfocus",
+      "path": "./syntaxes/webfocus.tmLanguage.json"
+    }]
+  }
+}
