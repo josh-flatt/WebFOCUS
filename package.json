@@ -10,16 +10,26 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "webfocus",
-      "aliases": ["WebFOCUS", "webfocus"],
-      "extensions": [".fex"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "webfocus",
-      "scopeName": "source.webfocus",
-      "path": "./syntaxes/webfocus.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "focexec",
+        "aliases": [
+          "WebFOCUS",
+          "FOCUS Executable",
+          "Procedure"
+        ],
+        "extensions": [
+          ".fex"
+        ],
+        "configuration": "./languages/focexec.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "focexec",
+        "scopeName": "source.fex",
+        "path": "./syntaxes/focexec.tmLanguage.json"
+      }
+    ]
   }
 }
