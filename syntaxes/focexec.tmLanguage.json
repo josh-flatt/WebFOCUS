@@ -7,6 +7,12 @@
 			"include": "#comments"
 		},
 		{
+			"include": "#dialogue-manager"
+		},
+		{
+			"include": "#file-define"
+		},
+		{
 			"include": "#strings"
 		},
 		{
@@ -23,9 +29,58 @@
 		}
 	],
 	"repository": {
+		"dialogue-manager": {
+			"match": "^(-)(CLOSE|DEFAULT|DEFAULTH|DOS|EXIT|\\?|GOTO|HTMLFORM|IF|INCLUDE|label|MVS|PASS|QUIT( FOCUS)?|READ|READFILE|REPEAT|RUN|SET|TSO|TYPE|UNIX|VMS|WINNT|WRITE)\\b",
+			"name": "keyword.control.focexec"
+		},
+		"file-define": {
+			"name": "keyword.control.focexec",
+			"begin": "^(DEFINE|TABLE) FILE",
+			"end": "END",
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#prints"
+				},
+				{
+					"include": "#table-column"
+				},
+				{
+					"include": "#table-name"
+				}
+			]
+		},
+		"table-name": {
+			"match": "(\\w+)$",
+			"name": "entity.name.function.focexec"
+		},
+		"prints": {
+			"name": "keyword.control.focexec",
+			"begin": "^(PRINT)",
+			"end": "^(WHERE|BY|ON)",
+			"patterns": [
+				{
+					"match": "(\\w)",
+					"name": "entity.name.tag.focexec"
+				}
+			]
+		},
+		"table-column": {
+			"name": "keyword.control.focexec",
+			"begin": "^(BY)",
+			"end": "$",
+			"patterns": [
+				{
+					"match": "(\\w)",
+					"name": "entity.name.tag.focexec"
+				}
+			]
+		},
 		"comments": {
 			"match": "-\\*([^\\n]*)",
-			"name": "comment.line.webfocus"
+			"name": "comment.line.focexec"
 		},
 		"strings": {
 			"match": "'([^']*)'",
