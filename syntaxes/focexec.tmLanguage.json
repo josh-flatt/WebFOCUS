@@ -39,13 +39,25 @@
 			"end": "END",
 			"patterns": [
 				{
+					"include": "#variables"
+				},
+				{
 					"include": "#comments"
+				},
+				{
+					"include": "#control"
+				},
+				{
+					"include": "#by-column"
+				},
+				{
+					"include": "#table-condition"
 				},
 				{
 					"include": "#prints"
 				},
 				{
-					"include": "#table-column"
+					"include": "#table-hold"
 				},
 				{
 					"include": "#table-name"
@@ -53,8 +65,12 @@
 			]
 		},
 		"table-name": {
-			"match": "(\\w+)$",
+			"match": "(\\w+)",
 			"name": "entity.name.function.focexec"
+		},
+		"table-column": {
+			"match": "(\\w|\\*)",
+			"name": "entity.name.tag.focexec"
 		},
 		"prints": {
 			"name": "keyword.control.focexec",
@@ -62,19 +78,67 @@
 			"end": "^(WHERE|BY|ON)",
 			"patterns": [
 				{
-					"match": "(\\w)",
-					"name": "entity.name.tag.focexec"
+					"include": "#table-column"
 				}
 			]
 		},
-		"table-column": {
+		"table-hold": {
+			"name": "",
+			"begin": "^ON TABLE HOLD",
+			"end": "$",
+			"patterns": [
+				{
+					"include": "#field-modifiers"
+				},
+				{
+					"include": "#table-name"
+				}
+			]
+		},
+		"by-column": {
 			"name": "keyword.control.focexec",
 			"begin": "^(BY)",
 			"end": "$",
 			"patterns": [
 				{
-					"match": "(\\w)",
-					"name": "entity.name.tag.focexec"
+					"include": "#table-column"
+				}
+			]
+		},
+		"table-condition": {
+			"name": "keyword.control.focexec",
+			"begin": "^(WHERE|IF)",
+			"end": "$",
+			"patterns": [
+				{
+					"include": "#variables"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#operators"
+				},
+				{
+					"include": "#control"
+				},
+				{
+					"include": "#comparisons"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"include": "#table-column"
+				},
+				{
+					"include": "#variables"
+				},
+				{
+					"include": "#table-name"
 				}
 			]
 		},
@@ -90,6 +154,14 @@
 			"match": "\\b(?:DEFINE|TABLE|COLUMN|SUM|BY)\\b",
 			"name": "keyword.control.webfocus"
 		},
+		"comparisons": {
+			"match": "\\b(EQ|NE|LE|LT|GE|GT|IN|IS|NOT|CONTAINS|LIKE|OR|AND)\\b",
+			"name": "keyword.operator.focexec"
+		},
+		"field-modifiers": {
+			"match": "\\b(AS|HOLDLIST|FORMAT|MISSING|SHOWBLANKS|STYLE|COMPOUND|MSG|INDEX|LINES)\\b",
+			"name": "support.type.property-name.focexec"
+		},
 		"operators": {
 			"match": "\\+|-|\\*|/|=",
 			"name": "keyword.operator.webfocus"
@@ -99,8 +171,12 @@
 			"name": "constant.numeric.webfocus"
 		},
 		"variables": {
-			"match": "\\$[a-zA-Z_][a-zA-Z0-9_]*",
-			"name": "variable.webfocus"
+			"match": "\\&[a-zA-Z_][a-zA-Z0-9_]*",
+			"name": "variable.other.focexec"
+		},
+		"control": {
+			"match": "(\\(|\\)|\\;|\\,)",
+			"name": "constant.other.focexec"
 		}
 	}
 }
