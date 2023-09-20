@@ -228,7 +228,7 @@
 			"name": "entity.name.tag.focexec"
 		},
 		"table-name-dot-column": {
-			"match": "(?<=[. ])\\w+(?=\\.)",
+			"match": "(?<=[. \\t])\\w+(?=\\.)",
 			"name": "entity.name.function.focexec"
 		},
 		"table-keywords": {
