@@ -113,6 +113,9 @@
 					"include": "#control"
 				},
 				{
+					"include": "#field-formats"
+				},
+				{
 					"include": "#table-keywords"
 				},
 				{
@@ -128,6 +131,9 @@
 					"include": "#table-style"
 				},
 				{
+					"include": "#table-name-dot-column"
+				},
+				{
 					"include": "#table-column"
 				}
 			]
@@ -138,7 +144,37 @@
 			"end": "^(END)\\b",
 			"patterns": [
 				{
+					"include": "#variables"
+				},
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#strings"
+				},
+				{
 					"include": "#table-file-name"
+				},
+				{
+					"include": "#field-formats"
+				},
+				{
+					"include": "#if-thens"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"include": "#operators"
+				},
+				{
+					"include": "#comparisons"
+				},
+				{
+					"include": "#table-name-dot-column"
+				},
+				{
+					"include": "#table-column"
 				}
 			]
 		},
@@ -191,13 +227,17 @@
 			"match": "(\\w|\\*)",
 			"name": "entity.name.tag.focexec"
 		},
+		"table-name-dot-column": {
+			"match": "(?<=[. ])\\w+(?=\\.)",
+			"name": "entity.name.function.focexec"
+		},
 		"table-keywords": {
 			"match": "\\b(PRINT|BY|AS|SUM|NOPRINT)\\b",
 			"name": "keyword.control.focexec"
 		},
 		"table-hold": {
 			"name": "",
-			"begin": "^ON TABLE HOLD",
+			"begin": "ON TABLE HOLD",
 			"end": "$",
 			"patterns": [
 				{
@@ -211,22 +251,9 @@
 				}
 			]
 		},
-		"by-column": {
-			"name": "keyword.control.focexec",
-			"begin": "^(BY)",
-			"end": "$",
-			"patterns": [
-				{
-					"include": "#comments"
-				},
-				{
-					"include": "#table-column"
-				}
-			]
-		},
 		"table-where": {
 			"name": "keyword.control.focexec",
-			"begin": "^(WHERE( TOTAL)?|IF)",
+			"begin": "(WHERE( TOTAL)?|IF)\\b",
 			"end": "(;)",
 			"patterns": [
 				{
@@ -252,6 +279,9 @@
 				},
 				{
 					"include": "#numbers"
+				},
+				{
+					"include": "#table-name-dot-column"
 				},
 				{
 					"include": "#table-column"
@@ -301,6 +331,12 @@
 					]
 				},
 				{
+					"include": "#table-where"
+				},
+				{
+					"include": "#table-name-dot-column"
+				},
+				{
 					"include": "#table-column"
 				}
 			]
@@ -331,6 +367,10 @@
 			"match": "\\b(?:DEFINE|TABLE|COLUMN|SUM|BY)\\b",
 			"name": "keyword.control.focexec"
 		},
+		"if-thens": {
+			"match": "\\b(IF|THEN|ELSE)\\b",
+			"name": "keyword.control.focexec"
+		},
 		"comparisons": {
 			"match": "\\b(EQ|NE|LE|LT|GE|GT|IN|IS|NOT|CONTAINS|LIKE|OR|AND)\\b",
 			"name": "keyword.operator.focexec"
@@ -340,11 +380,15 @@
 			"name": "support.type.property-name.focexec"
 		},
 		"operators": {
-			"match": "\\+|-|\\*|/|=",
+			"match": "(\\+|-|\\*|/|=|\\||,|;)",
 			"name": "keyword.operator.webfocus"
 		},
+		"field-formats": {
+			"match": "\\/[A-Z]+(?:\\d+(?:\\.\\d+)?)?(?!\\/)",
+			"name": "constant.language.focexec"
+		},
 		"numbers": {
-			"match": "\\b\\d+\\b",
+			"match": "\\b(\\d+|MISSING)\\b",
 			"name": "constant.numeric.webfocus"
 		},
 		"variables": {
