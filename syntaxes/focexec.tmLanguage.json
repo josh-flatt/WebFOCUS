@@ -57,6 +57,9 @@
 			"end": "$",
 			"patterns": [
 				{
+					"include": "#comments"
+				},
+				{
 					"include": "#strings"
 				},
 				{
@@ -134,6 +137,9 @@
 			"end": "^(WHERE|BY|ON)",
 			"patterns": [
 				{
+					"include": "#comments"
+				},
+				{
 					"include": "#table-column"
 				}
 			]
@@ -143,6 +149,9 @@
 			"begin": "^ON TABLE HOLD",
 			"end": "$",
 			"patterns": [
+				{
+					"include": "#comments"
+				},
 				{
 					"include": "#field-modifiers"
 				},
@@ -157,6 +166,9 @@
 			"end": "$",
 			"patterns": [
 				{
+					"include": "#comments"
+				},
+				{
 					"include": "#table-column"
 				}
 			]
@@ -164,8 +176,11 @@
 		"table-condition": {
 			"name": "keyword.control.focexec",
 			"begin": "^(WHERE( TOTAL)?|IF)",
-			"end": "$",
+			"end": "(;)",
 			"patterns": [
+				{
+					"include": "#comments"
+				},
 				{
 					"include": "#variables"
 				},
@@ -204,6 +219,9 @@
 			"end": "(\\*|END)$",
 			"patterns": [
 				{
+					"include": "#comments"
+				},
+				{
 					"match": "[\\s\\t\\n]{1,}(AS|NOPRINT|CLEAR|ADD|LEFT|OUTER|INNER|LEFT_OUTER|TO|PAGE-BREAK|SKIP-LINE)*\\b",
 					"name": "support.type.property-name.focexec"
 				},
@@ -216,6 +234,9 @@
 					"begin": "\\b(IN)\\b",
 					"end": "$",
 					"patterns": [
+						{
+							"include": "#comments"
+						},
 						{
 							"match": "\\b(TAG|AS)\\b",
 							"name": "support.type.property-name.focexec"
