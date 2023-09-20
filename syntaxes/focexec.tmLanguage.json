@@ -25,6 +25,9 @@
 			"include": "#file-define"
 		},
 		{
+			"include": "#file-table"
+		},
+		{
 			"include": "#strings"
 		},
 		{
@@ -92,10 +95,10 @@
 			"match": "^(-)(?:[A-Za-z_]+|\\d+)$",
 			"name": "support.type.property-name.focexec"
 		},
-		"file-define": {
+		"file-table": {
 			"name": "keyword.control.focexec",
-			"begin": "^(DEFINE|TABLE) FILE",
-			"end": "END",
+			"begin": "^(TABLE)",
+			"end": "^(END)\\b",
 			"patterns": [
 				{
 					"include": "#variables"
@@ -104,24 +107,81 @@
 					"include": "#comments"
 				},
 				{
+					"include": "#strings"
+				},
+				{
 					"include": "#control"
 				},
 				{
-					"include": "#by-column"
+					"include": "#table-keywords"
 				},
 				{
-					"include": "#table-condition"
+					"include": "#table-file-name"
 				},
 				{
-					"include": "#prints"
+					"include": "#table-where"
 				},
 				{
 					"include": "#table-hold"
 				},
 				{
+					"include": "#table-style"
+				},
+				{
+					"include": "#table-column"
+				}
+			]
+		},
+		"file-define": {
+			"name": "keyword.control.focexec",
+			"begin": "^(DEFINE)",
+			"end": "^(END)\\b",
+			"patterns": [
+				{
+					"include": "#table-file-name"
+				}
+			]
+		},
+		"table-file-name": {
+			"name": "keyword.control.focexec",
+			"begin": "\\b(FILE)\\b",
+			"end": "$",
+			"patterns": [
+				{
+					"name": "support.type.property-name.focexec",
+					"begin": "\\b(AT)\\b",
+					"end": "$",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"name": "support.type.property-name.focexec",
+							"begin": "\\b(TAG)\\b",
+							"end": "$",
+							"patterns": [
+								{
+									"match": "\\b(AS)\\b",
+									"name": "support.type.property-name.focexec"
+								},
+								{
+									"include": "#table-name"
+								}
+							]
+						},
+						{
+							"include": "#table-column"
+						}
+					]
+				},
+				{
 					"include": "#table-name"
 				}
 			]
+		},
+		"table-style": {
+			"match": "^(HEADING|FOOTING|STYLE|ENDSTYLE|\\$|INCLUDE)\\b",
+			"name": "keyword.control.focexec"
 		},
 		"table-name": {
 			"match": "(\\w+)",
@@ -131,18 +191,9 @@
 			"match": "(\\w|\\*)",
 			"name": "entity.name.tag.focexec"
 		},
-		"prints": {
-			"name": "keyword.control.focexec",
-			"begin": "^(PRINT)",
-			"end": "^(WHERE|BY|ON)",
-			"patterns": [
-				{
-					"include": "#comments"
-				},
-				{
-					"include": "#table-column"
-				}
-			]
+		"table-keywords": {
+			"match": "\\b(PRINT|BY|AS|SUM|NOPRINT)\\b",
+			"name": "keyword.control.focexec"
 		},
 		"table-hold": {
 			"name": "",
@@ -173,7 +224,7 @@
 				}
 			]
 		},
-		"table-condition": {
+		"table-where": {
 			"name": "keyword.control.focexec",
 			"begin": "^(WHERE( TOTAL)?|IF)",
 			"end": "(;)",
@@ -230,6 +281,9 @@
 					"name": "support.type.property-name.focexec"
 				},
 				{
+					"include": "#table-file-name"
+				},
+				{
 					"name": "support.type.property-name.focexec",
 					"begin": "\\b(IN)\\b",
 					"end": "$",
@@ -264,8 +318,12 @@
 					"include": "#variables"
 				},
 				{
-					"match": "([^']*)",
-					"name": "string.quoted.single.webfocus"
+					"match": ",",
+					"name": "constant.language.focexec"
+				},
+				{
+					"match": "([^('|,)]*)",
+					"name": "string.quoted.single.focexec"
 				}
 			]
 		},
