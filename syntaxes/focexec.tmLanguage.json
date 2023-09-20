@@ -10,6 +10,18 @@
 			"include": "#dialogue-manager"
 		},
 		{
+			"include": "#dialogue-manager-conditional"
+		},
+		{
+			"include": "#set-report-options"
+		},
+		{
+			"include": "#report-settings"
+		},
+		{
+			"include": "#comparisons"
+		},
+		{
 			"include": "#file-define"
 		},
 		{
@@ -17,6 +29,12 @@
 		},
 		{
 			"include": "#keywords"
+		},
+		{
+			"include": "#goto-marker"
+		},
+		{
+			"include": "#joins"
 		},
 		{
 			"include": "#operators"
@@ -30,8 +48,46 @@
 	],
 	"repository": {
 		"dialogue-manager": {
-			"match": "^(-)(CLOSE|DEFAULT|DEFAULTH|DOS|EXIT|\\?|GOTO|HTMLFORM|IF|INCLUDE|label|MVS|PASS|QUIT( FOCUS)?|READ|READFILE|REPEAT|RUN|SET|TSO|TYPE|UNIX|VMS|WINNT|WRITE)\\b",
+			"match": "^(-)(CLOSE|DEFAULT|DEFAULTH|DOS|EXIT|\\?|GOTO|HTMLFORM|INCLUDE|label|MVS|PASS|QUIT( FOCUS)?|READ|READFILE|REPEAT|RUN|SET|TSO|TYPE|UNIX|VMS|WINNT|WRITE)\\b",
 			"name": "keyword.control.focexec"
+		},
+		"dialogue-manager-conditional": {
+			"name": "keyword.control.focexec",
+			"begin": "^(-)(IF)",
+			"end": "$",
+			"patterns": [
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#variables"
+				},
+				{
+					"match": "\\b(THEN)\\b",
+					"name": "keyword.control.less.focexec"
+				},
+				{
+					"include": "#goto-declare"
+				},
+				{
+					"include": "#comparisons"
+				}
+			]
+		},
+		"goto-declare": {
+			"name": "keyword.control.focexec",
+			"begin": "\\b(GOTO)\\b",
+			"end": ";",
+			"patterns": [
+				{
+					"match": "(?:[A-Za-z_]+|\\d+)",
+					"name": "support.type.property-name.focexec"
+				}
+			]
+		},
+		"goto-marker": {
+			"match": "^(-)(?:[A-Za-z_]+|\\d+)$",
+			"name": "support.type.property-name.focexec"
 		},
 		"file-define": {
 			"name": "keyword.control.focexec",
@@ -107,7 +163,7 @@
 		},
 		"table-condition": {
 			"name": "keyword.control.focexec",
-			"begin": "^(WHERE|IF)",
+			"begin": "^(WHERE( TOTAL)?|IF)",
 			"end": "$",
 			"patterns": [
 				{
@@ -142,17 +198,59 @@
 				}
 			]
 		},
+		"joins": {
+			"name": "keyword.other.focexec",
+			"begin": "JOIN",
+			"end": "(\\*|END)$",
+			"patterns": [
+				{
+					"match": "[\\s\\t\\n]{1,}(AS|NOPRINT|CLEAR|ADD|LEFT|OUTER|INNER|LEFT_OUTER|TO|PAGE-BREAK|SKIP-LINE)*\\b",
+					"name": "support.type.property-name.focexec"
+				},
+				{
+					"match": "\\b(MULTIPLE|UNIQUE|AND)\\b",
+					"name": "support.type.property-name.focexec"
+				},
+				{
+					"name": "support.type.property-name.focexec",
+					"begin": "\\b(IN)\\b",
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(TAG|AS)\\b",
+							"name": "support.type.property-name.focexec"
+						},
+						{
+							"include": "#table-name"
+						}
+					]
+				},
+				{
+					"include": "#table-column"
+				}
+			]
+		},
 		"comments": {
 			"match": "-\\*([^\\n]*)",
 			"name": "comment.line.focexec"
 		},
 		"strings": {
-			"match": "'([^']*)'",
-			"name": "string.quoted.single.webfocus"
+			"name": "string.quoted.single.focexec",
+			"begin": "'",
+			"end": "'",
+			"patterns": [
+				{
+					"include": "#variables"
+				},
+				{
+					"match": "([^']*)",
+					"name": "string.quoted.single.webfocus"
+				}
+			]
 		},
 		"keywords": {
 			"match": "\\b(?:DEFINE|TABLE|COLUMN|SUM|BY)\\b",
-			"name": "keyword.control.webfocus"
+			"name": "keyword.control.focexec"
 		},
 		"comparisons": {
 			"match": "\\b(EQ|NE|LE|LT|GE|GT|IN|IS|NOT|CONTAINS|LIKE|OR|AND)\\b",
@@ -176,7 +274,34 @@
 		},
 		"control": {
 			"match": "(\\(|\\)|\\;|\\,)",
-			"name": "constant.other.focexec"
+			"name": "constant.language.focexec"
+		},
+		"report-settings": {
+			"match": "\\b(ANSI|MISSING|PRINTONLY|NOPRINT|PASS|ON|OFF|OPEN)\\b",
+			"name": "constant.language.focexec"
+		},
+		"set-report-options": {
+			"name": "keyword.control.focexec",
+			"begin": "^(SET)",
+			"end": "$",
+			"patterns": [
+				{
+					"include": "#operators"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#variables"
+				},
+				{
+					"include": "#reserved"
+				},
+				{
+					"match": "\\b(EMPTYREPORT|BYDISPLAY|ASNAMES|EXCELSERVURL|HOLDLIST|MISSING|COMPOUND|XRETRIEVAL|ALL)\\b",
+					"name": "keyword.other.unit"
+				}
+			]
 		}
 	}
 }
