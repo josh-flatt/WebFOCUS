@@ -110,10 +110,13 @@
 					"include": "#strings"
 				},
 				{
+					"include": "#numbers"
+				},
+				{
 					"include": "#control"
 				},
 				{
-					"include": "#field-formats"
+					"include": "#field-suffixes"
 				},
 				{
 					"include": "#table-keywords"
@@ -125,10 +128,13 @@
 					"include": "#table-where"
 				},
 				{
-					"include": "#table-hold"
+					"include": "#on-table"
 				},
 				{
 					"include": "#table-style"
+				},
+				{
+					"include": "#field-prefixes"
 				},
 				{
 					"include": "#table-name-dot-column"
@@ -156,7 +162,7 @@
 					"include": "#table-file-name"
 				},
 				{
-					"include": "#field-formats"
+					"include": "#field-suffixes"
 				},
 				{
 					"include": "#if-thens"
@@ -169,6 +175,9 @@
 				},
 				{
 					"include": "#comparisons"
+				},
+				{
+					"include": "#field-prefixes"
 				},
 				{
 					"include": "#table-name-dot-column"
@@ -192,12 +201,19 @@
 							"include": "#comments"
 						},
 						{
+							"match": "\\b(AS|TO|MULTIPLE|UNIQUE|AND)\\b",
+							"name": "support.type.property-name.focexec"
+						},
+						{
 							"name": "support.type.property-name.focexec",
 							"begin": "\\b(TAG)\\b",
 							"end": "$",
 							"patterns": [
 								{
-									"match": "\\b(AS)\\b",
+									"include": "#comments"
+								},
+								{
+									"match": "\\b(AS|TO|MULTIPLE|UNIQUE|AND)\\b",
 									"name": "support.type.property-name.focexec"
 								},
 								{
@@ -232,16 +248,96 @@
 			"name": "entity.name.function.focexec"
 		},
 		"table-keywords": {
-			"match": "\\b(PRINT|BY|AS|SUM|NOPRINT)\\b",
+			"match": "\\b(PRINT|BY|AS|SUM|NOPRINT|HIGHEST|LOWEST)\\b",
 			"name": "keyword.control.focexec"
 		},
 		"table-hold": {
-			"name": "",
+			"name": "keyword.control.focexec",
 			"begin": "ON TABLE HOLD",
 			"end": "$",
 			"patterns": [
 				{
 					"include": "#comments"
+				},
+				{
+					"include": "#field-modifiers"
+				},
+				{
+					"include": "#table-name"
+				}
+			]
+		},
+		"on-table": {
+			"name": "keyword.control.focexec",
+			"begin": "ON TABLE",
+			"end": "$",
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"match": "\\b(COLUMN-TOTAL|NOTOTAL|PAGE-BREAK AND (SUBHEAD|SUBFOOT)|RECAP|RECOMPUTE|ROW-TOTAL|SEND|SET( ONFIELD| STYLE \\*)?|ENDSTYLE|SUBFOOT|SUBHEAD|SUMMARIZE)\\b",
+					"name": "keyword.other"
+				},
+				{
+					"include": "#hold-format"
+				},
+				{
+					"include": "#pchold-format"
+				},
+				{
+					"include": "#field-modifiers"
+				},
+				{
+					"include": "#table-name"
+				}
+			]
+		},
+		"hold-format": {
+			"name": "keyword.other.focexec",
+			"begin": "\\b(HOLD)\\b",
+			"end": "$",
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"name": "keyword.control.focexec",
+					"begin": "\\b(FORMAT)\\b",
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(ALPHA|AHTML|BINARY|CLIP|COM|COMMA|COMT|DB2|DBASE|DHTML|DIF|DOC|EXCEL|EXL2K|EXL97|FOCCACHE|FOCUS|GIF|HTML( BYTOC)?|HTMTABLE|INGRES|INFORMIX|INTERNAL|JPEG|LOTUS|ORACLE|PDF|POSTSCRIPT|PPT|PS|REDBRICK|RTF|SQL|SQLDBC|SQLINF|SQLMAC|SQLMSS|SQLODBC|SQLORA|SQLSYSB|SYLK|TAB|TABT|VISDIS|WK1|WP|XFOCUS|XLSX)\\b",
+							"name": "constant.language.focexec"
+						}
+					]
+				},
+				{
+					"include": "#field-modifiers"
+				},
+				{
+					"include": "#table-name"
+				}
+			]
+		},
+		"pchold-format": {
+			"name": "keyword.other.focexec",
+			"begin": "\\b(PCHOLD)\\b",
+			"end": "$",
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"name": "keyword.control.focexec",
+					"begin": "\\b(FORMAT)\\b",
+					"end": "$",
+					"patterns": [
+						{
+							"match": "\\b(ALPHA|AHTML|BINARY|COM|COMT|DIF|DOC|EXCEL|EXL2K|EXL97|HTML|HTMTABLE|LOTUS|PDF|PPT|POSTSCRIPT|PS|TAB|TABT|VISDIS|WP|XLSX)\\b",
+							"name": "constant.language.focexec"
+						}
+					]
 				},
 				{
 					"include": "#field-modifiers"
@@ -260,10 +356,10 @@
 					"include": "#comments"
 				},
 				{
-					"include": "#variables"
+					"include": "#strings"
 				},
 				{
-					"include": "#strings"
+					"include": "#variables"
 				},
 				{
 					"include": "#keywords"
@@ -303,11 +399,11 @@
 					"include": "#comments"
 				},
 				{
-					"match": "[\\s\\t\\n]{1,}(AS|NOPRINT|CLEAR|ADD|LEFT|OUTER|INNER|LEFT_OUTER|TO|PAGE-BREAK|SKIP-LINE)*\\b",
+					"match": "\\b(AS|NOPRINT|CLEAR|ADD|LEFT|OUTER|INNER|LEFT_OUTER|PAGE-BREAK|SKIP-LINE)\\b",
 					"name": "support.type.property-name.focexec"
 				},
 				{
-					"match": "\\b(MULTIPLE|UNIQUE|AND)\\b",
+					"match": "\\b(TO|MULTIPLE|UNIQUE|AND)\\b",
 					"name": "support.type.property-name.focexec"
 				},
 				{
@@ -323,6 +419,10 @@
 						},
 						{
 							"match": "\\b(TAG|AS)\\b",
+							"name": "support.type.property-name.focexec"
+						},
+						{
+							"match": "\\b(TO|MULTIPLE|UNIQUE|AND)\\b",
 							"name": "support.type.property-name.focexec"
 						},
 						{
@@ -358,7 +458,7 @@
 					"name": "constant.language.focexec"
 				},
 				{
-					"match": "([^('|,)]*)",
+					"match": "([^']*)",
 					"name": "string.quoted.single.focexec"
 				}
 			]
@@ -383,7 +483,11 @@
 			"match": "(\\+|-|\\*|/|=|\\||,|;)",
 			"name": "keyword.operator.webfocus"
 		},
-		"field-formats": {
+		"field-prefixes": {
+			"match": "\\b(ALL|ASQ|AVE(.DST)?|CNT(.DST)?|FST|LST|MAX|MIN|PCT(.CNT)?|RNK|RPCT|SEG|SEGMENT|SUM(.DST)?|TOT).",
+			"name": "constant.language.focexec"
+		},
+		"field-suffixes": {
 			"match": "\\/[A-Z]+(?:\\d+(?:\\.\\d+)?)?(?!\\/)",
 			"name": "constant.language.focexec"
 		},
