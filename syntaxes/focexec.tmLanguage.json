@@ -248,7 +248,7 @@
 			"name": "entity.name.function.focexec"
 		},
 		"table-keywords": {
-			"match": "\\b(PRINT|BY|AS|SUM|NOPRINT|HIGHEST|LOWEST)\\b",
+			"match": "\\b(PRINT|BY( TOTAL COMPUTE)?|AS|SUM|NOPRINT|HIGHEST|LOWEST)\\b",
 			"name": "keyword.control.focexec"
 		},
 		"table-hold": {
