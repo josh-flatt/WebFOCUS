@@ -17,3 +17,16 @@ Depending on your platform, it's located in the following directory:
 ## 0.2.0
 
 Initial VSCode Extension Marketplace release.
+
+## 0.2.1
+
+Non-functional update.
+
+- Added more details to Visual Studio Marketplace page.
+  - Banner -> Darkened.
+  - Icon -> New Icon.
+  - Tags -> Added more:
+    - fex
+    - FOCUS
+    - webfocus
+- Updated Readme to be more concise/accurate.

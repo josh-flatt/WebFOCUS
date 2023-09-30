@@ -14,6 +14,6 @@ Please navigate to the [Issues Tab](https://github.com/josh-flatt/WebFOCUS/issue
 
 ## Release Notes
 
-Please refer to the [Changelog](CHANGELOG.md) to view all MAJOR, MINOR, and PATCH (0.0.X) release notes.
+Please refer to the [Changelog](CHANGELOG.md) to view all MAJOR, MINOR, and PATCH release notes.
 
 ---

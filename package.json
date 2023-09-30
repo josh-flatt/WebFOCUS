@@ -2,7 +2,7 @@
   "name": "webfocus-language-support",
   "displayName": "WebFOCUS Language Support",
   "description": "Language Support including syntax highlighting for WebFOCUS",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "preview": true,
   "publisher": "incandescently",
   "author": {
@@ -10,7 +10,12 @@
     "url": "https://github.com/josh-flatt"
   },
   "license": "MIT",
-  "homepage": "https://github.com/josh-flatt/WebFOCUS.git",
+  "galleryBanner": {
+    "color": "#29343a",
+    "theme": "dark"
+  },
+  "icon": "images/logo.png",
+  "homepage": "https://github.com/josh-flatt/WebFOCUS",
   "repository": {
     "type": "git",
     "url": "https://github.com/josh-flatt/WebFOCUS.git"
@@ -21,6 +26,12 @@
   "categories": [
     "Programming Languages",
     "Formatters"
+  ],
+  "keywords": [
+    "FOCUS",
+    "WebFOCUS",
+    "fex",
+    "focexec"
   ],
   "contributes": {
     "languages": [
