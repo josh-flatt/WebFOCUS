@@ -1,9 +1,15 @@
 # Change Log
 
-All notable changes to the "webfocus" extension will be documented in this file.
+All notable changes to the WebFOCUS extension are documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 0.1.0
 
-## [Unreleased]
+Initial release (preview).
 
-- Initial release
+This has not yet been published in the VSCode Extensions Marketplace. If you would like to preview this extension, you need to download this repository, unzip it into your VSCode Extensions directory (~/.vscode/extensions), and make sure that you modify the leading "W" in the folder name to be lower case.
+
+Depending on your platform, it's located in the following directory:
+
+- **Windows:** %USERPROFILE%\\.vscode\extensions
+- **macOS:** ~/.vscode/extensions
+- **Linux:** ~/.vscode/extensions
