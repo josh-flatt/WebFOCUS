@@ -1,13 +1,26 @@
 {
-  "name": "webfocus",
-  "displayName": "WebFOCUS",
-  "description": "WebFOCUS Language Support",
-  "version": "0.0.1",
+  "name": "webfocus-language-support",
+  "displayName": "WebFOCUS Language Support",
+  "description": "Language Support including syntax highlighting for WebFOCUS",
+  "version": "0.2.0",
+  "preview": true,
+  "publisher": "incandescently",
+  "author": {
+    "name": "Josh Flatt",
+    "url": "https://github.com/josh-flatt"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/josh-flatt/WebFOCUS.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josh-flatt/WebFOCUS.git"
+  },
   "engines": {
     "vscode": "^1.82.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Formatters"
   ],
   "contributes": {
     "languages": [

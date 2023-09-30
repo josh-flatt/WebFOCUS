@@ -13,3 +13,7 @@ Depending on your platform, it's located in the following directory:
 - **Windows:** %USERPROFILE%\\.vscode\extensions
 - **macOS:** ~/.vscode/extensions
 - **Linux:** ~/.vscode/extensions
+
+## 0.2.0
+
+Initial VSCode Extension Marketplace release.
