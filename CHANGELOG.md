@@ -30,3 +30,17 @@ Non-functional update.
     - FOCUS
     - webfocus
 - Updated Readme to be more concise/accurate.
+
+## 0.2.2
+
+Bug Fixes.
+
+- Accounted for some join syntax.
+  - TAG X AS X no longer has to be on one line.
+- Updated to account for double quotes.
+- Fixed issue regarding `ctrl + /` not commenting out lines.
+- Changed criteria for variables.
+- Added new parameters for WHERE clauses
+  - Added `FROM + TO` highlighting.
+  - Added `NOT-FROM` highlighting.
+- Fixed bug where ghost column prefixes were being incorrectly detected.

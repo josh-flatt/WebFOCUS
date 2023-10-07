@@ -56,7 +56,7 @@
 		},
 		"dialogue-manager-conditional": {
 			"name": "keyword.control.focexec",
-			"begin": "^(-)(IF)",
+			"begin": "^(-|=(\\w+))(IF)",
 			"end": "$",
 			"patterns": [
 				{
@@ -86,13 +86,13 @@
 			"end": ";",
 			"patterns": [
 				{
-					"match": "(?:[A-Za-z_]+|\\d+)",
+					"match": "(?:[A-Za-z0-9_]+|\\d+)",
 					"name": "support.type.property-name.focexec"
 				}
 			]
 		},
 		"goto-marker": {
-			"match": "^(-)(?:[A-Za-z_]+|\\d+)$",
+			"match": "^(-)(?:[A-Za-z0-9_]+|\\d+)$",
 			"name": "support.type.property-name.focexec"
 		},
 		"file-table": {
@@ -248,7 +248,7 @@
 			"name": "entity.name.function.focexec"
 		},
 		"table-keywords": {
-			"match": "\\b(PRINT|BY( TOTAL COMPUTE)?|AS|SUM|NOPRINT|HIGHEST|LOWEST)\\b",
+			"match": "\\b(PRINT|BY( TOTAL( COMPUTE)?)?|AS|SUM|NOPRINT|HIGHEST|LOWEST)(?!\\.)\\b",
 			"name": "keyword.control.focexec"
 		},
 		"table-hold": {
@@ -399,7 +399,7 @@
 					"include": "#comments"
 				},
 				{
-					"match": "\\b(AS|NOPRINT|CLEAR|ADD|LEFT|OUTER|INNER|LEFT_OUTER|PAGE-BREAK|SKIP-LINE)\\b",
+					"match": "\\b(NOPRINT|CLEAR|ADD|LEFT|OUTER|INNER|LEFT_OUTER|PAGE-BREAK|SKIP-LINE)\\b",
 					"name": "support.type.property-name.focexec"
 				},
 				{
@@ -431,6 +431,23 @@
 					]
 				},
 				{
+					"name": "support.type.property-name.focexec",
+					"begin": "\\b(TAG|AS)\\b",
+					"end": "$",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"match": "\\b(AS)\\b",
+							"name": "support.type.property-name.focexec"
+						},
+						{
+							"include": "#table-name"
+						}
+					]
+				},
+				{
 					"include": "#table-where"
 				},
 				{
@@ -446,6 +463,16 @@
 			"name": "comment.line.focexec"
 		},
 		"strings": {
+			"patterns": [
+				{
+					"include": "#strings-double-quot"
+				},
+				{
+					"include": "#strings-single-quot"
+				}
+			]
+		},
+		"strings-single-quot": {
 			"name": "string.quoted.single.focexec",
 			"begin": "'",
 			"end": "'",
@@ -463,6 +490,24 @@
 				}
 			]
 		},
+		"strings-double-quot": {
+			"name": "string.quoted.double.focexec",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"include": "#variables"
+				},
+				{
+					"match": ",",
+					"name": "constant.language.focexec"
+				},
+				{
+					"match": "([^\"]*)",
+					"name": "string.quoted.single.focexec"
+				}
+			]
+		},
 		"keywords": {
 			"match": "\\b(?:DEFINE|TABLE|COLUMN|SUM|BY)\\b",
 			"name": "keyword.control.focexec"
@@ -472,7 +517,7 @@
 			"name": "keyword.control.focexec"
 		},
 		"comparisons": {
-			"match": "\\b(EQ|NE|LE|LT|GE|GT|IN|IS|NOT|CONTAINS|LIKE|OR|AND)\\b",
+			"match": "\\b(EQ|NE|LE|LT|GE|GT|IN|IS|NOT|CONTAINS|LIKE|OR|AND|FROM|TO|(NOT-FROM))\\b",
 			"name": "keyword.operator.focexec"
 		},
 		"field-modifiers": {
@@ -484,11 +529,11 @@
 			"name": "keyword.operator.focexec"
 		},
 		"field-prefixes": {
-			"match": "\\b(ALL|ASQ|AVE(.DST)?|CNT(.DST)?|FST|LST|MAX|MIN|PCT(.CNT)?|RNK|RPCT|SEG|SEGMENT|SUM(.DST)?|TOT).",
+			"match": "\\b(ALL|ASQ|AVE(\\.DST)?|CNT(\\.DST)?|FST|LST|MAX|MIN|PCT(.CNT)?|RNK|RPCT|SEG|SEGMENT|SUM(\\.DST)?|TOT)((\\.DST)?)\\.",
 			"name": "constant.language.focexec"
 		},
 		"field-suffixes": {
-			"match": "\\/[A-Z]+(?:\\d+(?:\\.\\d+)?)?(?!\\/)",
+			"match": "\\/[A-Z]+(?:\\d+(?:\\.\\d+)?)?(?!\\/)(V|v)?",
 			"name": "constant.language.focexec"
 		},
 		"numbers": {
@@ -496,7 +541,7 @@
 			"name": "constant.numeric.focexec"
 		},
 		"variables": {
-			"match": "\\&[a-zA-Z_][a-zA-Z0-9_]*",
+			"match": "\\&[a-zA-Z0-9_]+",
 			"name": "variable.other.focexec"
 		},
 		"control": {
